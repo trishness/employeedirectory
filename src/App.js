@@ -5,13 +5,15 @@ import './App.css';
 function EmployeeCard({ img, name, phone, email }) {
   return (
     <>
+      <div style={styles.card} className="card">
       <div>
-        <img src={img} alt={name.first} />
+        <img style={{padding:"3.5rem"}} src={img} alt={name.first} />
         <div>
-          <p>{`${name.first} ${name.last}`}</p>
+          <p style={{fontWeight:"bold"}}>{`${name.first} ${name.last}`}</p>
           <p>{phone}</p>
           <p>{email}</p>
         </div>
+      </div>
       </div>
     </>
   )
@@ -33,7 +35,11 @@ const styles={
   button:{
     display:"flex",
     justifyContent: "space-around",
-    margin:"4.0rem"
+    margin:"2.0rem"
+  },
+  card:{
+    margin:"2rem",
+    background:"#66CDAA"
   }
 }
 
@@ -103,7 +109,6 @@ class App extends Component {
     return (
       <div className="App">
         <h1 style={styles.header} className="jumbotron jumbotron-fluid">Fire&Vine Hospitality</h1>
-        <br></br>
         <br></br>
         <label style={{fontWeight:"bold"}} htmlFor="numInput"># of Employees
       <input style={{marginLeft:"1rem"}}

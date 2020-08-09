@@ -21,10 +21,14 @@ const styles={
   employeeContainer:{
     display:"flex",
     flexWrap: "wrap",
-    justifyContent: "center"
+    justifyContent: "center",
+  },
+  header:{
+    background:"#66CDAA",
+    color:"#FFFAFA"
   },
   label: {
-    margin:"4.0rem"
+    margin:"2.0rem"
   },
   button:{
     display:"flex",
@@ -98,9 +102,11 @@ class App extends Component {
     const isNumberEntered = this.state.numInput === 0
     return (
       <div className="App">
-        <h1 className="jumbotron jumbotron-fluid">Fire&Vine Hospitality</h1>
-        <label style={styles.input} htmlFor="numInput"># of Employees
-      <input style={styles.input}
+        <h1 style={styles.header} className="jumbotron jumbotron-fluid">Fire&Vine Hospitality</h1>
+        <br></br>
+        <br></br>
+        <label style={{fontWeight:"bold"}} htmlFor="numInput"># of Employees
+      <input style={{marginLeft:"1rem"}}
             id="numInput"
             name="numInput"
             type="number"
@@ -108,12 +114,12 @@ class App extends Component {
             min="0"
             onChange={this.handleInputChange}
           />
+          <button style={{margin:"1rem"}} disabled={isNumberEntered} onClick={this.makeRequest} className="btn btn-secondary">{isNumberEntered ? "Please Enter a Number" : "Submit"}</button>
         </label>
-        <button disabled={isNumberEntered} onClick={this.makeRequest} className="btn btn-primary">{isNumberEntered ? "Please Enter a Number" : "Submit"}</button>
         <div style={styles.button}>
-        <button onClick={this.filterFemaleEmployees} className="btn btn-primary">Filter by Females</button>
-        <button onClick={this.filterMaleEmployees} className="btn btn-primary">Filter by Males</button>
-        <button onClick={this.sortABC} className="btn btn-primary">Sort Alphabetically</button>
+        <button onClick={this.filterFemaleEmployees} className="btn btn-secondary">Filter by Females</button>
+        <button onClick={this.filterMaleEmployees} className="btn btn-secondary">Filter by Males</button>
+        <button onClick={this.sortABC} className="btn btn-secondary">Sort Alphabetically</button>
         </div>
         <div style={styles.employeeContainer}>
           {this.renderEmployees()}

@@ -16,11 +16,20 @@ function EmployeeCard({ img, name, phone, email }) {
     </>
   )
 }
+
 const styles={
   employeeContainer:{
     display:"flex",
     flexWrap: "wrap",
     justifyContent: "center"
+  },
+  label: {
+    margin:"4.0rem"
+  },
+  button:{
+    display:"flex",
+    justifyContent: "space-around",
+    margin:"4.0rem"
   }
 }
 
@@ -41,7 +50,10 @@ class App extends Component {
     const URL = `https://randomuser.me/api/?results=${this.state.numInput}&nat=us`
     try {
       let results = await axios.get(URL)
-      this.setState({ users: results.data.results })
+      this.setState({ 
+        users: results.data.results,
+        filteredUsers: results.data.results,
+      })
       console.log(results)
     } catch (e) {
       console.log("Error:", e)
@@ -73,7 +85,7 @@ class App extends Component {
   }
 
   renderEmployees = () => {
-    return this.state.users.map(user => <EmployeeCard
+    return this.state.filteredUsers.map(user => <EmployeeCard
       key={user.id.value}
       img={user.picture.large}
       name={user.name}
@@ -86,9 +98,9 @@ class App extends Component {
     const isNumberEntered = this.state.numInput === 0
     return (
       <div className="App">
-        <h1>Fire&Vine Hospitality</h1>
-        <label htmlFor="numInput"># of Employees
-      <input
+        <h1 className="jumbotron jumbotron-fluid">Fire&Vine Hospitality</h1>
+        <label style={styles.input} htmlFor="numInput"># of Employees
+      <input style={styles.input}
             id="numInput"
             name="numInput"
             type="number"
@@ -98,11 +110,11 @@ class App extends Component {
           />
         </label>
         <button disabled={isNumberEntered} onClick={this.makeRequest} className="btn btn-primary">{isNumberEntered ? "Please Enter a Number" : "Submit"}</button>
-        <br></br>
+        <div style={styles.button}>
         <button onClick={this.filterFemaleEmployees} className="btn btn-primary">Filter by Females</button>
         <button onClick={this.filterMaleEmployees} className="btn btn-primary">Filter by Males</button>
-        <br></br>
         <button onClick={this.sortABC} className="btn btn-primary">Sort Alphabetically</button>
+        </div>
         <div style={styles.employeeContainer}>
           {this.renderEmployees()}
         </div>

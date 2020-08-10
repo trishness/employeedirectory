@@ -27,7 +27,8 @@ const styles={
   },
   header:{
     background:"#66CDAA",
-    color:"#FFFAFA"
+    color:"#FFFAFA",
+    fontSize:"70px"
   },
   label: {
     margin:"2.0rem"
